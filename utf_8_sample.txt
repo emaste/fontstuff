@@ -2,7 +2,20 @@
 ------ ------ ----- -----------------------------------------
 U+0000 U+007F   128 Basic Latin
 
+Example Characters
 
+          Block                       Character
+------ ------------------ -----------------------------------
+U+0020 Basic Latin        SPACE                              ' '
+U+0021 Basic Latin        EXCLAMATION MARK                    !
+U+007E Basic Latin        TILDE                               ~
+U+00A0 Latin-1 Supplement NO-BREAK SPACE                     ' '
+U+00A1 Latin-1 Supplement INVERTED EXCLAMATION MARK           ¡
+U+00B0 Latin-1 Supplement DEGREE SIGN                         °
+U+00FF Latin-1 Supplement LATIN SMALL LETTER Y WITH DIAERESIS ÿ
+U+0100 Latin Extended-A   LATIN CAPITAL LETTER A WITH MACRON  Ā
+U+0374 Greek and Coptic   GREEK NUMERAL SIGN                  ʹ
+U+0800 Samaritan          ARABIC LNUMBER SIGN                 ؀
 
 Samples of various languages, courtesy of Google Translate:
 
@@ -12,4 +25,3 @@ Chinese (Traditional): 中國（傳統）
 Chinese (Simplified): 中国（简体）
 Japanese: 日本語
 Korean: 한국의
-
