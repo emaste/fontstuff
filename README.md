@@ -17,6 +17,10 @@ xset fp rehash
 xterm -fn -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 ```
 
+iso-8x16.hex
+------------
+Source: FreeBSD share/syscons/fonts/iso-8x16.fnt  
+
 k16-1990.hex
 ------------
 Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.bdf  
