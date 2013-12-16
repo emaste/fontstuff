@@ -1,0 +1,14 @@
+#!/usr/local/bin/perl
+
+while (<>)
+{
+	$G{$1}=$2 if /^(....):(.+)\n/;
+}
+
+for (sort keys %G)
+{
+	print "$_:$G{$_}\n";
+}
+
+# hexmerge taipei16.hex cns-2-16.hex jisksp16.hex jiskan16.hex
+# hanglm16.hex gb16fs.hex ethiopic.hex etl | tee select
