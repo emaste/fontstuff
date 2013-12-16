@@ -1,5 +1,8 @@
 #!/usr/local/bin/perl
 
+# hexmerge from the "GNU unifont" project
+# http://czyborra.com/unifont/hexmerge
+
 while (<>)
 {
 	$G{$1}=$2 if /^(....):(.+)\n/;

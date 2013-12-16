@@ -1,5 +1,8 @@
 #!/usr/local/bin/perl
 
+# hex2bdf from the "GNU unifont" project
+# http://czyborra.com/unifont/
+
 while (<>) { $glyph{$1} = $2 if /(....):(.+)\n/; }
 @chars = sort keys %glyph; $[ = 1;
 # dbmopen (%charname, "/usr/share/unicode/unidata/charname.db", 0);
