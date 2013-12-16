@@ -15,7 +15,7 @@ U+00B0 Latin-1 Supplement DEGREE SIGN                         °
 U+00FF Latin-1 Supplement LATIN SMALL LETTER Y WITH DIAERESIS ÿ
 U+0100 Latin Extended-A   LATIN CAPITAL LETTER A WITH MACRON  Ā
 U+0374 Greek and Coptic   GREEK NUMERAL SIGN                  ʹ
-U+0800 Samaritan          ARABIC LNUMBER SIGN                 ؀
+U+0800 Samaritan          ARABIC NUMBER SIGN                  ؀
 
 Samples of various languages, courtesy of Google Translate:
 
