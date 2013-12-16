@@ -21,7 +21,11 @@ Samples of various languages, courtesy of Google Translate:
 
 French: Français
 German: Deutsch
+Greek: ελληνικά
 Chinese (Traditional): 中國（傳統）
 Chinese (Simplified): 中国（简体）
 Japanese: 日本語
 Korean: 한국의
+Punjabi: ਪੰਜਾਬੀ ਦੇ
+Tamil: தமிழ்
+Thai: ภาษาไทย
