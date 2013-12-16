@@ -1,0 +1,15 @@
+ From    To     #   Description
+------ ------ ----- -----------------------------------------
+U+0000 U+007F   128 Basic Latin
+
+
+
+Samples of various languages, courtesy of Google Translate:
+
+French: Français
+German: Deutsch
+Chinese (Traditional): 中國（傳統）
+Chinese (Simplified): 中国（简体）
+Japanese: 日本語
+Korean: 한국의
+
