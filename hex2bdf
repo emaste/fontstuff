@@ -8,7 +8,7 @@ while (<>) { $glyph{$1} = $2 if /(....):(.+)\n/; }
 # dbmopen (%charname, "/usr/share/unicode/unidata/charname.db", 0);
 
 print "STARTFONT 2.1
-FONT -gnu-unifont-medium-r-normal--16-160-75-75-c-80-iso10646-1
+FONT -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 SIZE 16 75 75
 FONTBOUNDINGBOX 16 16 0 -2
 STARTPROPERTIES 3
