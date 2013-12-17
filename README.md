@@ -19,10 +19,10 @@ xterm -fn -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 
 k16-1990.hex
 ------------
-Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.bdf
+Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.bdf  
 License: public domain
 
 newcons-default-{normal,bold}.hex
 ---------------------------------
-Source: FreeBSD sys/dev/vt/font/vt_font_default.c
+Source: FreeBSD sys/dev/vt/font/vt_font_default.c  
 License: 2-clause BSD
