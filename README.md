@@ -24,10 +24,10 @@ Source: FreeBSD share/syscons/fonts/iso-8x16.fnt
 k16-1990.hex
 ------------
 Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.bdf  
-License: public domain
-Notable content: CJK Symbols and Punctuation, Hiragana, Katakana, CJK Unified Ideographs 
+License: public domain  
+Notable content: CJK Symbols and Punctuation, Hiragana, Katakana, CJK Unified Ideographs  
 
 newcons-default-{normal,bold}.hex
 ---------------------------------
 Source: FreeBSD sys/dev/vt/font/vt_font_default.c  
-License: 2-clause BSD
+License: 2-clause BSD  
