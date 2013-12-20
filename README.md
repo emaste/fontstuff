@@ -25,6 +25,7 @@ k16-1990.hex
 ------------
 Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.bdf  
 License: public domain
+Notable content: CJK Symbols and Punctuation, Hiragana, Katakana, CJK Unified Ideographs 
 
 newcons-default-{normal,bold}.hex
 ---------------------------------
