@@ -1,0 +1,90 @@
+#!/usr/local/bin/lua-5.1
+
+blocks = {
+  { "0000", "007F", "Basic Latin"},
+  { "0080", "00FF", "Latin-1 Supplement"},
+  { "0100", "017F", "Latin Extended-A"},
+  { "0180", "024F", "Latin Extended-B"},
+  { "0250", "02AF", "IPA Extensions"},
+  { "02B0", "02FF", "Spacing Modifier Letters"},
+  { "0300", "036F", "Combining Diacritical Marks"},
+  { "0370", "03FF", "Greek"},
+  { "0400", "04FF", "Cyrillic"},
+  { "0530", "058F", "Armenian"},
+  { "0590", "05FF", "Hebrew"},
+  { "0600", "06FF", "Arabic"},
+  { "0E00", "0E7F", "Thai"},
+  { "0E80", "0EFF", "Lao"},
+  { "10A0", "10FF", "Georgian"},
+  { "1200", "137F", "Ethiopic"},
+  { "1E00", "1EFF", "Latin Extended Additional"},
+  { "1F00", "1FFF", "Greek Extended"},
+  { "2000", "206F", "General Punctuation"},
+  { "2070", "209F", "Superscripts and Subscripts"},
+  { "20A0", "20CF", "Currency Symbols"},
+  { "20D0", "20FF", "Combining Marks for Symbols"},
+  { "2100", "214F", "Letterlike Symbols"},
+  { "2150", "218F", "Number Forms"},
+  { "2190", "21FF", "Arrows"},
+  { "2200", "22FF", "Mathematical Operators"},
+  { "2300", "23FF", "Miscellaneous Technical"},
+  { "2400", "243F", "Control Pictures"},
+  { "2440", "245F", "Optical Character Recognition"},
+  { "2460", "24FF", "Enclosed Alphanumerics"},
+  { "2500", "257F", "Box Drawing"},
+  { "2580", "259F", "Block Elements"},
+  { "25A0", "25FF", "Geometric Shapes"},
+  { "2600", "26FF", "Miscellaneous Symbols"},
+  { "2700", "27BF", "Dingbats"},
+  { "2800", "28FF", "Braille Pattern Symbols"},
+  { "3000", "303F", "CJK Symbols and Punctuation"},
+  { "3040", "309F", "Hiragana"},
+  { "30A0", "30FF", "Katakana"},
+  { "3100", "312F", "Bopomofo"},
+  { "3130", "318F", "Hangul Compatibility Jamo"},
+  { "3200", "32FF", "Enclosed CJK Letters and Months"},
+  { "3300", "33FF", "CJK Compatibility"},
+  { "4E00", "9FFF", "CJK Unified Ideographs"},
+  { "AC00", "D7A3", "Hangul Syllables"},
+  { "F900", "FAFF", "CJK Compatibility Ideographs"},
+  { "FB00", "FB4F", "Alphabetic Presentation Forms"},
+  { "FB50", "FDFF", "Arabic Presentation Forms-A"},
+  { "FE20", "FE2F", "Combining Half Marks"},
+  { "FE30", "FE4F", "CJK Compatibility Forms"},
+  { "FE50", "FE6F", "Small Form Variants"},
+  { "FE70", "FEFF", "Arabic Presentation Forms-B"},
+  { "FF00", "FFEF", "Halfwidth and Fullwidth Forms"},
+  { "FFF0", "FFFF", "Specials"},
+}
+
+counts = {}
+
+row = 1
+first = nil
+
+for line in io.lines(arg[1]) do
+    unicode = tonumber(line:match("%x+"), 16)
+
+    repeat
+        if not first then
+            first = tonumber(blocks[row][1], 16)
+            last = tonumber(blocks[row][2], 16)
+        end
+
+        if unicode < first then
+            error("font went backwards or missing block")
+        elseif unicode > last then
+            row = row + 1
+            first = nil
+        end
+    until unicode <= last
+
+    counts[row] = (counts[row] or 0) + 1
+end
+
+print("Count    Range                        Description")
+print("-----  ---------  ---------------------------------------------------")
+for i, row in ipairs(blocks) do
+    io.write(string.format("%5s  %-4s %-4s  %s\n", counts[i] or 0,
+      blocks[i][1], blocks[i][2], blocks[i][3]))
+end
