@@ -2,6 +2,9 @@
 
 # hexmerge from the "GNU unifont" project
 # http://czyborra.com/unifont/hexmerge
+#
+# usage: hexmerge [input.hex ...] > output.hex
+# later files take precedence if multiple files provide the same character
 
 while (<>)
 {
@@ -12,6 +15,3 @@ for (sort keys %G)
 {
 	print "$_:$G{$_}\n";
 }
-
-# hexmerge taipei16.hex cns-2-16.hex jisksp16.hex jiskan16.hex
-# hanglm16.hex gb16fs.hex ethiopic.hex etl | tee select
