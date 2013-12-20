@@ -32,7 +32,7 @@ ENCODING $encoding
 SWIDTH $swidth 0
 DWIDTH $dwidth 0
 BBX $dwidth 16 0 -2
-BITMAP $glyph
+BITMAP$glyph
 ENDCHAR\n";
 }
 
