@@ -1,5 +1,5 @@
-Newcons UTF-8 Font Stuff
-========================
+Newcons Unicode Font Stuff
+==========================
 
 This repository contains a bits and pieces related to fixed-size bitmap fonts.
 The goal is to produce fonts for the FreeBSD Newcons console update project.
