@@ -27,5 +27,6 @@ Chinese (Simplified): 中国（简体）
 Japanese: 日本語
 Korean: 한국의
 Punjabi: ਪੰਜਾਬੀ ਦੇ
+Russian: Русский
 Tamil: தமிழ்
 Thai: ภาษาไทย
