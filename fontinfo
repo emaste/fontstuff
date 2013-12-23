@@ -46,6 +46,7 @@ blocks = {
   { "3300", "33FF", "CJK Compatibility"},
   { "4E00", "9FFF", "CJK Unified Ideographs"},
   { "AC00", "D7A3", "Hangul Syllables"},
+  { "E000", "F8FF", "Private Use Area"},
   { "F900", "FAFF", "CJK Compatibility Ideographs"},
   { "FB00", "FB4F", "Alphabetic Presentation Forms"},
   { "FB50", "FDFF", "Arabic Presentation Forms-A"},
