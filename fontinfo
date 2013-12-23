@@ -63,7 +63,8 @@ row = 1
 first = nil
 
 for line in io.lines(arg[1]) do
-    unicode = tonumber(line:match("%x+"), 16)
+    unicode_hex = line:match("%x+")
+    unicode = tonumber(unicode_hex, 16)
 
     repeat
         if not first then
@@ -72,7 +73,7 @@ for line in io.lines(arg[1]) do
         end
 
         if unicode < first then
-            error("font went backwards or missing block")
+            error("font went backwards or missing block for U+" .. unicode_hex)
         elseif unicode > last then
             row = row + 1
             first = nil
