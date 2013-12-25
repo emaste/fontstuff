@@ -19,8 +19,8 @@ xterm -fn -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 
 b16.hex
 -------
-Source: b16.bdf in http://openlab.ring.gr.jp/efont/dist/unicode-bdf/efont-unicode-bdf-0.4.2.tar.bz2
-License: 3-clause BSD license
+Source: b16.bdf in http://openlab.ring.gr.jp/efont/dist/unicode-bdf/efont-unicode-bdf-0.4.2.tar.bz2  
+License: 3-clause BSD license  
 
 iso-8x16.hex
 ------------
