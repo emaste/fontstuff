@@ -17,6 +17,11 @@ xset fp rehash
 xterm -fn -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 ```
 
+b16.hex
+-------
+Source: b16.bdf in http://openlab.ring.gr.jp/efont/dist/unicode-bdf/efont-unicode-bdf-0.4.2.tar.bz2  
+License: 3-clause BSD license  
+
 iso-8x16.hex
 ------------
 Source: FreeBSD share/syscons/fonts/iso-8x16.fnt  
@@ -27,7 +32,7 @@ Source: http://web.mit.edu/ghudson/dev/nokrb/third/intlfonts/Japanese/k16-1990.b
 License: public domain  
 Notable content: CJK Symbols and Punctuation, Hiragana, Katakana, CJK Unified Ideographs  
 
-newcons-default-{normal,bold}.hex
+vt-default-{normal,bold}.hex
 ---------------------------------
 Source: FreeBSD sys/dev/vt/font/vt_font_default.c  
 License: 2-clause BSD  
