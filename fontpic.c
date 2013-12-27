@@ -27,7 +27,7 @@
 
 #define MAXSTRING 256
 
-#define HEADER_STRING "GNU Unifont 6.3" /* to be printed as chart title */
+#define HEADER_STRING "Font Image" /* to be printed as chart title */
 
 
 int main(int argc, char **argv) {
@@ -95,7 +95,7 @@ void output2(int thisword) {
 
 
 /*
-   gethex() reads a Unifont .hex-format input file from stdin.
+   gethex() reads a Unifont-style .hex-format input file from stdin.
 */
 void gethex(int bitarray[0x10000][16]) {
 
