@@ -117,9 +117,13 @@ for line in io.lines(arg[1]) do
     counts[row] = (counts[row] or 0) + 1
 end
 
-print("Count    Range                        Description")
-print("-----  ---------  ---------------------------------------------------")
+print("Count   %     Range                        Description")
+print("----- ----  ---------  ---------------------------------------------------")
 for i, row in ipairs(blocks) do
-    io.write(string.format("%5s  %-4s %-4s  %s\n", counts[i] or 0,
-      blocks[i][1], blocks[i][2], blocks[i][3]))
+    count = counts[i] or 0
+    first = blocks[i][1]
+    last = blocks[i][2]
+    span = tonumber(last, 16) - tonumber(first, 16) + 1
+    io.write(string.format("%5s %3.0f%%  %-4s %-4s  %s\n", count,
+      100 * count / span, first, last, blocks[i][3]))
 end
