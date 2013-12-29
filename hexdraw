@@ -1,0 +1,145 @@
+#!/usr/local/bin/lua-5.1
+
+-- Copyright (c) 2013-2014 The FreeBSD Foundation
+-- All rights reserved.
+--
+-- This software was developed by Ed Maste under sponsorship from
+-- The FreeBSD Foundation.
+--
+-- Redistribution and use in source and binary forms, with or without
+-- modification, are permitted provided that the following conditions
+-- are met:
+--
+-- 1. Redistributions of source code must retain the above copyright
+--    notice, this list of conditions and the following disclaimer.
+-- 2. Redistributions in binary form must reproduce the above copyright
+--    notice, this list of conditions and the following disclaimer in the
+--    documentation and/or other materials provided with the distribution.
+--
+-- THIS SOFTWARE IS PROVIDED BY THE AUTHORS AND CONTRIBUTORS ``AS IS'' AND
+-- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
+-- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+-- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+-- OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+-- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+-- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+-- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+-- SUCH DAMAGE.
+
+-- Convert a hex format font to / from an ASCII-art representation in the same
+-- style as hexdraw from GNU unifont.
+
+char_width = 8
+char_height = 16
+
+function calculate_char_vals()
+    char_width_bytes = math.ceil(char_width / 8)
+    char_width_bits = char_width_bytes * 8
+    char_bytes = char_width_bytes * char_height
+end
+
+function set_width(line, match)
+    print (line)
+    char_width = match[1]
+    calculate_char_vals()
+    return true
+end
+
+function set_height(line, match)
+    print (line)
+    char_height = match[1]
+    calculate_char_vals()
+    return true
+end
+
+function hex_to_ascii_art(line, match)
+    addr = match[1]
+    bytes = match[2]
+    if not addr or not bytes then
+        print(match)
+        return false
+    end
+    if bytes:len() ~= char_bytes and bytes:len() ~= char_bytes * 2 then
+        return false
+    end
+    addr = tonumber(addr, 16)
+    if addr < 0 or addr > 65535 then
+        return false
+    end
+
+    prefix = string.format("%04X:\t", addr)
+
+    bytes_per_row = bytes:len() / char_height
+
+    repeat
+        row = bytes:sub(1, bytes_per_row)
+        row = tonumber(row, 16)
+        bytes = bytes:sub(bytes_per_row + 1)
+        art = ""
+        for i = 1, char_width, 1 do
+            if row >= 2 ^ (char_width_bits - 1) then
+                art = art .. '#'
+                row = row - 2 ^ (char_width_bits - 1)
+            else
+                art = art .. '-'
+            end
+            row = row * 2
+        end
+        print(prefix .. art)
+        prefix = "\t"
+    until bytes:len() == 0
+    print()
+    return true
+end
+
+function ascii_art_line(line, match)
+    hexstr = match[1]
+    nbits = math.ceil(hexstr:len() / 8) * 8
+    hexstr = hexstr .. "        "
+    val = 0
+    bval = 128
+    for i = 1, nbits do
+        if hexstr:sub(1, 1) == "#" then
+            val = val + bval
+        end
+        hexstr = hexstr:sub(2)
+        bval = bval / 2
+        if bval < 1 then
+            io.write(string.format("%02X", val))
+            val = 0
+            bval = 128
+        end
+    end
+    return true
+end
+
+function ascii_art_start(line, match)
+    io.write(match[1] .. ":")
+    return ascii_art_line(line, {match[2]})
+end
+
+expressions = {
+    ["# Width: (%d+)"] = set_width,
+    ["# Height: (%d+)"] = set_height,
+    ["(%x+):(%x+)"] = hex_to_ascii_art,
+    ["^(%x+):%s*([-#]+)"] = ascii_art_start,
+    ["^%s*([-#]+)"] = ascii_art_line
+}
+
+calculate_char_vals()
+
+for line in io.lines(arg[1]) do
+    found = false
+    for exp,fn in pairs(expressions) do
+        match = {line:match(exp)}
+        if next(match) ~= nil and fn(line, match) then
+            found = true
+            break
+        end
+    end
+    if not found then
+        print (line)
+    end
+end
