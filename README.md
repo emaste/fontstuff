@@ -37,6 +37,16 @@ b16.hex
 Source: b16.bdf in http://openlab.ring.gr.jp/efont/dist/unicode-bdf/efont-unicode-bdf-0.4.2.tar.bz2  
 License: 3-clause BSD license  
 
+bold8x16.hex
+------------
+Source: http://ftp.netbsd.org/pub/NetBSD/NetBSD-current/src/sys/dev/wsfont/bold8x16.h  
+License: Public domain  
+
+gallant12x22.hex
+----------------
+Source: http://ftp.netbsd.org/pub/NetBSD/NetBSD-current/src/sys/dev/wsfont/gallant12x22.h  
+License: 3-caluse BSD license  
+
 iso-8x16.hex
 ------------
 Source: FreeBSD share/syscons/fonts/iso-8x16.fnt  
