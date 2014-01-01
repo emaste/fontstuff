@@ -62,13 +62,20 @@ end
 
 function output_char(codepoint, hex)
     local per_row = hex:len() / char_height
+    local double = per_row / 2 / char_width_bytes
     io.write(string.format([[STARTCHAR U+%04X
 ENCODING %d
-SWIDTH 500 0
+SWIDTH %d 0
 DWIDTH %d 0
 BBX %d %d 0 -2
 BITMAP
-]], codepoint, codepoint, char_width, char_width, char_height))
+]],
+      codepoint,
+      codepoint,
+      500 * double,
+      char_width * double,
+      char_width * double,
+      char_height))
     for i = 1, char_height do
         io.write(string.format("%s\n", hex:sub(1, per_row)))
         hex = hex:sub(per_row + 1)
