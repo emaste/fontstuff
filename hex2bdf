@@ -1,0 +1,112 @@
+#!/usr/local/bin/lua-5.1
+
+-- Copyright (c) 2013-2014 The FreeBSD Foundation
+-- All rights reserved.
+--
+-- This software was developed by Ed Maste under sponsorship from
+-- The FreeBSD Foundation.
+--
+-- Redistribution and use in source and binary forms, with or without
+-- modification, are permitted provided that the following conditions
+-- are met:
+--
+-- 1. Redistributions of source code must retain the above copyright
+--    notice, this list of conditions and the following disclaimer.
+-- 2. Redistributions in binary form must reproduce the above copyright
+--    notice, this list of conditions and the following disclaimer in the
+--    documentation and/or other materials provided with the distribution.
+--
+-- THIS SOFTWARE IS PROVIDED BY THE AUTHORS AND CONTRIBUTORS ``AS IS'' AND
+-- ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
+-- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+-- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+-- OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+-- HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+-- LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+-- OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+-- SUCH DAMAGE.
+
+-- Convert from hex format fonts to BDF
+
+-- Default to 8x16 if unspecified
+char_width = 8
+char_height = 16
+
+function calculate_char_vals()
+    char_width_bytes = math.ceil(char_width / 8)
+    char_width_bits = char_width_bytes * 8
+    char_bytes = char_width_bytes * char_height
+end
+
+function set_width(line, match)
+    char_width = match[1]
+    calculate_char_vals()
+    return true
+end
+
+function set_height(line, match)
+    char_height = match[1]
+    calculate_char_vals()
+    return true
+end
+
+chars = {}
+glyph = {}
+function read_char(line, match)
+    c = tonumber(match[1], 16)
+    table.insert(chars, c)
+    glyph[c] = match[2]
+end
+
+function output_char(codepoint, hex)
+    local per_row = hex:len() / char_height
+    io.write(string.format([[STARTCHAR U+%04X
+ENCODING %d
+SWIDTH 500 0
+DWIDTH %d 0
+BBX %d %d 0 -2
+BITMAP
+]], codepoint, codepoint, char_width, char_width, char_height))
+    for i = 1, char_height do
+        io.write(string.format("%s\n", hex:sub(1, per_row)))
+        hex = hex:sub(per_row + 1)
+    end
+    io.write("ENDCHAR\n")
+end
+
+expressions = {
+    ["# Width: (%d+)"] = set_width,
+    ["# Height: (%d+)"] = set_height,
+    ["(%x+):(%x+)"] = read_char,
+}
+
+calculate_char_vals()
+
+for line in io.lines(arg[1]) do
+    for exp,fn in pairs(expressions) do
+        match = {line:match(exp)}
+        if next(match) ~= nil and fn(line, match) then
+            break
+        end
+    end
+end
+
+io.write(string.format([[STARTFONT 2.1
+FONT -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
+SIZE 16 75 75
+FONTBOUNDINGBOX %d %d 0 -2
+STARTPROPERTIES 3
+FONT_ASCENT %d
+FONT_DESCENT 2
+DEFAULT_CHAR 32
+ENDPROPERTIES
+]], char_width * 2, char_height, char_height - 2))
+io.write(string.format("CHARS %d\n", #chars))
+
+for i,codepoint in ipairs(chars) do
+    output_char(codepoint, glyph[codepoint])
+end
+
+io.write("ENDFONT\n")
