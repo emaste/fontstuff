@@ -31,9 +31,20 @@
 -- Convert a binary 256-character font as found in /usr/share/syscons/fonts
 -- to the hex format used by unifont (http://czyborra.com/unifont/)
 
--- XXX these should be commandline parameters
 char_width = 8
 char_height = 16
+
+if arg[1] == "-x" then
+    table.remove(arg, 1)
+    char_width = table.remove(arg, 1)
+end
+if arg[1] == "-y" then
+    table.remove(arg, 1)
+    char_height = table.remove(arg, 1)
+end
+
+io.write(string.format("# Width: %d\n", char_width))
+io.write(string.format("# Height: %d\n", char_height))
 
 char_width_bytes = math.ceil(char_width / 8)
 char_bytes = char_width_bytes * char_height
