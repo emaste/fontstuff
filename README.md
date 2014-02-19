@@ -42,6 +42,14 @@ bold8x16.hex
 Source: http://ftp.netbsd.org/pub/NetBSD/NetBSD-current/src/sys/dev/wsfont/bold8x16.h  
 License: Public domain  
 
+cp437-8x8.hex
+-------------
+Source: FreeBSD share/syscons/fonts/cp437-8x8.fnt  
+
+cp437-8x16.hex
+--------------
+Source: FreeBSD share/syscons/fonts/cp437-8x16.fnt  
+
 gallant12x22.hex
 ----------------
 Source: http://ftp.netbsd.org/pub/NetBSD/NetBSD-current/src/sys/dev/wsfont/gallant12x22.h  
