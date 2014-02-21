@@ -4,9 +4,9 @@ Newcons Unicode Font Stuff
 This repository contains a bits and pieces related to fixed-size bitmap fonts.
 The goal is to produce fonts for the FreeBSD Newcons console update project.
 
-A number of tools here are from the GNU Unifont project.  Roman Czyborra came
-up with a simple ASCII hex format for font data which is perfectly suited to
-this application.
+Some tools tools here are obtained from or similar to ones from Roman
+Czyborra's GNU Unifont project.  Roman came up with a simple ASCII hex format
+for bitmap font data which is perfectly suited to this application.
 
 To try out one of the fonts in an xterm, use:
 ```sh
