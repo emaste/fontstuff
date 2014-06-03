@@ -8,6 +8,7 @@ Example Characters
 ------ ------------------ -----------------------------------
 U+0020 Basic Latin        SPACE                              ' '
 U+0021 Basic Latin        EXCLAMATION MARK                    !
+U+007B Basic Latin        LEFT CURLY BRACKET                 '{'
 U+007E Basic Latin        TILDE                               ~
 U+00A0 Latin-1 Supplement NO-BREAK SPACE                     ' '
 U+00A1 Latin-1 Supplement INVERTED EXCLAMATION MARK           ¡
