@@ -1,4 +1,4 @@
-#!/usr/local/bin/lua-5.1
+#!/usr/libexec/flua
 
 -- Copyright (c) 2013-2014 The FreeBSD Foundation
 -- All rights reserved.
