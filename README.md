@@ -19,7 +19,7 @@ xterm -fn -freebsd-misc-medium-r-normal--16-160-75-75-c-80-iso10646-1
 
 To produce a .bmp image showing each glyph in a .hex font:
 ```sh
-cc -o fontpic fontpic.c
+cc -o fontpic gpl/fontpic.c
 ./fontpic < vt-default-normal.hex > vt-default-normal.bmp
 ```
 
